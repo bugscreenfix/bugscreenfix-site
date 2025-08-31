@@ -24,6 +24,28 @@
   </header>
 
   <main>
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-lime-100 via-white to-white"></div>
+      <div class="relative container py-10 md:py-16 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Screens fixed, bugs stopped.</h1>
+          <p class="mt-4 text-lg text-neutral-700">Fast, mobile window and door screen repair in the KC Northland. Upfront prices, on-site service, and easy online scheduling.</p>
+          <p class="mt-3 text-sm font-semibold text-emerald-700">Pet owners: ask about tougher, pet‑resistant and sun‑resistant screen materials. We can review options on‑site.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#pricing" class="btn bg-neutral-900 text-white hover:bg-neutral-800">See pricing</a>
+            <a href="#book" class="btn bg-lime-600 text-white hover:bg-lime-700">Schedule now</a>
+          </div>
+        </div>
+        <div class="md:justify-self-end w-full">
+          <div class="card shadow-sm">
+            <img src="images/hero.jpg" alt="Local handyman repairing window screen" class="rounded-xl mb-3 w-full h-48 object-cover"/>
+            <p class="text-sm text-neutral-600">Local handyman, authentic screen repair service.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Pricing -->
     <section id="pricing" class="py-12 border-t border-neutral-200">
       <div class="container">
@@ -35,7 +57,11 @@
           <div class="card"><div class="text-lg font-semibold">Patio door rescreen</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$99</div><div class="text-xs text-neutral-500 mt-1">Most sliders</div></div>
           <div class="card"><div class="text-lg font-semibold">New sliding screen door</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$249</div><div class="text-xs text-neutral-500 mt-1">Includes labor and standard materials</div></div>
         </div>
-        <div class="mt-6 text-sm text-neutral-600"><strong>Bulk discounts available</strong> for HOAs and housing managers. Ask us about multi unit pricing.</div>
+        <div class="mt-6 text-sm text-neutral-600"><strong>Bulk discounts available</strong> for HOAs and housing managers. Ask us about multi‑unit pricing.</div>
+        <div class="card mt-8">
+          <img src="images/tech.jpg" alt="Handyman rescreening a sliding door" class="rounded-xl mb-3 w-full h-64 object-cover"/>
+          <p class="text-sm text-neutral-600">Professional rescreening service done on‑site.</p>
+        </div>
       </div>
     </section>
 
@@ -47,6 +73,7 @@
 
         <!-- Quote Calculator -->
         <div class="card mt-6 space-y-6">
+          <!-- counts -->
           <div>
             <label class="text-sm font-medium">Windows (up to 60&quot;) — $39</label>
             <div class="mt-2 flex items-center gap-2">
@@ -64,8 +91,26 @@
             </div>
           </div>
 
-          <!-- Totals -->
-          <div class="mt-4 bg-neutral-50 border p-4 rounded-xl text-sm">
+          <!-- affinity checkboxes -->
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="card">
+              <div class="text-sm font-semibold mb-2">Who are you?</div>
+              <label class="flex items-center gap-2 text-sm"><input id="isHOA" type="checkbox" class="h-4 w-4" onchange="syncNotes()"/> HOA / Property manager</label>
+              <label class="flex items-center gap-2 text-sm mt-2"><input id="isBuilder" type="checkbox" class="h-4 w-4" onchange="syncNotes()"/> Builder</label>
+              <label class="flex items-center gap-2 text-sm mt-2"><input id="isContractor" type="checkbox" class="h-4 w-4" onchange="syncNotes()"/> Contractor</label>
+            </div>
+            <div class="card">
+              <div class="text-sm font-semibold mb-2">Materials & durability</div>
+              <label class="flex items-start gap-2 text-sm">
+                <input id="optMaterials" type="checkbox" class="mt-1 h-4 w-4" onchange="syncNotes()"/>
+                <span>I want to discuss tougher screen materials (e.g., pet‑resistant, solar). Please review options with me on‑site.</span>
+              </label>
+              <textarea id="materialsNotes" class="mt-2 w-full rounded-xl border p-2 text-sm" rows="3" placeholder="Optional: tell us about pets, sun exposure, or other needs" oninput="syncNotes()"></textarea>
+            </div>
+          </div>
+
+          <!-- totals -->
+          <div class="mt-2 bg-neutral-50 border p-4 rounded-xl text-sm">
             <div class="flex items-center justify-between mt-1"><div>Items subtotal</div><div>$<span id="itemsSubtotal">0.00</span></div></div>
             <div class="flex items-center justify-between mt-3"><div>Service fee to reach ~$99 (cap $35)</div><div>$<span id="serviceFee">0.00</span></div></div>
             <div class="mt-2 border-t pt-3 flex items-center justify-between font-semibold text-lg"><div>Estimated total</div><div>$<span id="finalTotal">0.00</span></div></div>
@@ -77,13 +122,13 @@
         <div class="card mt-6">
           <div class="grid md:grid-cols-[1fr_auto] gap-4 items-end">
             <div>
-              <label class="text-sm font-medium">Screen/door frame rebuilds (custom pricing on-site)</label>
+              <label class="text-sm font-medium">Screen/door frame rebuilds (custom pricing on‑site)</label>
               <div class="mt-2 flex items-center gap-2">
                 <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyRebuilds',-1)" aria-label="decrease rebuilds">−</button>
                 <input id="qtyRebuilds" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" step="1" value="0" />
                 <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyRebuilds',1)" aria-label="increase rebuilds">+</button>
               </div>
-              <p class="text-xs text-neutral-500 mt-1">Don't need a quote? Book now and we'll price on-site.</p>
+              <p class="text-xs text-neutral-500 mt-1">Don't need a quote? Book now and we'll price on‑site.</p>
             </div>
             <button type="button" class="px-4 py-3 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800" onclick="bookRebuilds()">Book rebuilds without a quote</button>
           </div>
@@ -95,6 +140,12 @@
           <p class="text-sm text-neutral-600">Choose a time that works for you. You will receive an automatic email confirmation.</p>
           <iframe id="calendlyFrame" src="https://calendly.com/installer-bugscreenfix/30min?hide_event_type_details=1&hide_gdpr_banner=1" width="100%" height="700" frameborder="0" class="mt-3"></iframe>
           <div class="text-xs text-neutral-500 mt-2">If the calendar doesn’t load, <a class="underline" target="_blank" href="https://calendly.com/installer-bugscreenfix/30min">open Calendly</a>.</div>
+        </div>
+
+        <!-- Before/After Image -->
+        <div class="card mt-8">
+          <img src="images/before-after.jpg" alt="Before and after of window screen repair" class="rounded-xl mb-3 w-full h-64 object-cover"/>
+          <p class="text-sm text-neutral-600">Before and after comparison: torn screen vs. clean screen.</p>
         </div>
       </div>
     </section>
@@ -158,6 +209,30 @@
       setText('itemsSubtotal', itemsSubtotal);
       setText('serviceFee', serviceFee);
       setText('finalTotal', finalTotal);
+
+      // Keep Calendly notes synced when quantities change
+      syncNotes();
+    }
+
+    // Sync notes/flags into Calendly query params so they show in booking
+    function syncNotes(){
+      const ifr = $('calendlyFrame');
+      if(!ifr) return;
+      try{
+        const u = new URL(ifr.src);
+        // Who are you flags
+        const tags = [];
+        if($('isHOA')?.checked) tags.push('HOA/Property Manager');
+        if($('isBuilder')?.checked) tags.push('Builder');
+        if($('isContractor')?.checked) tags.push('Contractor');
+        u.searchParams.set('a1', tags.join(', ') || '');
+        // Materials interest
+        const wants = $('optMaterials')?.checked;
+        const note = $('materialsNotes')?.value?.trim() || '';
+        const msg = wants ? ('Materials: discuss tougher options. '+ (note?('Notes: '+note):'')) : '';
+        u.searchParams.set('a2', msg);
+        ifr.src = u.toString();
+      }catch(e){}
     }
 
     // Quick-book rebuilds
@@ -176,8 +251,9 @@
     // Init
     document.addEventListener('DOMContentLoaded', () => {
       const y = $('year'); if(y) y.textContent = new Date().getFullYear();
-      // If someone types directly in number fields, keep totals in sync
-      ['qtyWindows','qtyOversized'].forEach(id => { const el=$(id); if(el){ el.addEventListener('input', calc); }});
+      // input listeners keep totals and notes in sync
+      ['qtyWindows','qtyOversized','materialsNotes'].forEach(id => { const el=$(id); if(el){ el.addEventListener('input', ()=>{calc();}); }});
+      ['isHOA','isBuilder','isContractor','optMaterials'].forEach(id => { const el=$(id); if(el){ el.addEventListener('change', syncNotes); }});
       calc();
     });
   </script>
