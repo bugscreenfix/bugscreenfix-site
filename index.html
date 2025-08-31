@@ -93,7 +93,7 @@
         <div class="card mt-6">
           <div class="grid md:grid-cols-2 gap-6">
             <div>
-              <label class="text-sm font-medium">Windows (up to 60")</label>
+              <label class="text-sm font-medium">Windows (up to 60\")</label>
               <div class="mt-2 flex items-center gap-2">
                 <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyWindows',-1)">−</button>
                 <input id="qtyWindows" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" oninput="calc()" />
@@ -102,13 +102,22 @@
               <div class="text-xs text-neutral-500 mt-1">$39 each</div>
             </div>
             <div>
-              <label class="text-sm font-medium">Oversized windows (over 60")</label>
+              <label class="text-sm font-medium">Oversized windows (over 60\")</label>
               <div class="mt-2 flex items-center gap-2">
                 <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyOversized',-1)">−</button>
                 <input id="qtyOversized" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" oninput="calc()" />
                 <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyOversized',1)">+</button>
               </div>
               <div class="text-xs text-neutral-500 mt-1">$59 each</div>
+            </div>
+            <div>
+              <label class="text-sm font-medium">Screen/door frame rebuilds</label>
+              <div class="mt-2 flex items-center gap-2">
+                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyRebuild',-1)">−</button>
+                <input id="qtyRebuild" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" oninput="calc()" />
+                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyRebuild',1)">+</button>
+              </div>
+              <div class="text-xs text-neutral-500 mt-1">Custom pricing — schedule without quote</div>
             </div>
           </div>
 
@@ -118,6 +127,22 @@
             <div class="flex items-center justify-between mt-3"><div>Service fee to reach ~$99 (cap $35)</div><div>$<span id="serviceFee">0.00</span></div></div>
             <div class="mt-2 border-t pt-3 flex items-center justify-between font-semibold text-lg"><div>Estimated total</div><div>$<span id="finalTotal">0.00</span></div></div>
             <div class="text-[11px] text-neutral-500 mt-1">Small jobs may include a service fee up to $35 to bring the ticket near $99.</div>
+          </div>
+        </div>
+
+        <!-- Frame rebuilds quick-book -->
+        <div class=\"card mt-6\">
+          <div class=\"grid md:grid-cols-[1fr_auto] gap-4 items-end\">
+            <div>
+              <label class=\"text-sm font-medium\">Number of screen or screen-door <span class=\"whitespace-nowrap\">frame rebuilds</span></label>
+              <div class=\"mt-2 flex items-center gap-2\">
+                <button type=\"button\" class=\"px-3 py-2 rounded-xl border\" onclick=\"adjust('qtyRebuilds',-1)\">−</button>
+                <input id=\"qtyRebuilds\" class=\"w-24 rounded-xl border p-2 text-center\" type=\"number\" min=\"0\" step=\"1\" value=\"0\" />
+                <button type=\"button\" class=\"px-3 py-2 rounded-xl border\" onclick=\"adjust('qtyRebuilds',1)\">+</button>
+              </div>
+              <p class=\"text-xs text-neutral-500 mt-1\">Don't need a quote? Book now and we'll price on-site.</p>
+            </div>
+            <button type=\"button\" class=\"px-4 py-3 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800\" onclick=\"bookRebuilds()\">Book rebuilds without a quote</button>
           </div>
         </div>
 
@@ -161,7 +186,7 @@
     const $ = id => document.getElementById(id);
     const setText = (id, val) => { const el = $(id); if (el) el.textContent = (typeof val === 'number' ? val.toFixed(2) : val); };
     function valInt(id){ return Math.max(0, parseInt($(id)?.value || '0', 10)); }
-    function adjust(id, delta){ const el = $(id); const v = Math.max(0, (parseInt(el.value || '0', 10) || 0) + delta); el.value = v; calc(); }
+    function adjust(id, delta){ const el = $(id); if(!el) return; const cur = parseInt(el.value || '0', 10) || 0; const v = Math.max(0, cur + delta); el.value = v; if(el.oninput){ el.oninput(new Event('input')); } else { const ev = document.createEvent('Event'); ev.initEvent('input', true, true); el.dispatchEvent(ev); } }
 
     function calc(){
       const qW = valInt('qtyWindows');
@@ -177,6 +202,19 @@
       setText('itemsSubtotal', itemsSubtotal);
       setText('serviceFee', serviceFee);
       setText('finalTotal', finalTotal);
+    }
+
+    function bookRebuilds(){
+      const countEl = $('qtyRebuilds');
+      const count = countEl ? (parseInt(countEl.value || '0',10)||0) : 0;
+      const ifr = document.getElementById('calendlyFrame');
+      if(!ifr){ window.location.hash = '#book'; return; }
+      try{
+        var url = new URL(ifr.src);
+        url.searchParams.set('a3', 'Frame rebuilds: ' + count);
+        ifr.src = url.toString();
+      }catch(e){}
+      ifr.scrollIntoView({behavior:'smooth', block:'start'});
     }
 
     document.addEventListener('DOMContentLoaded', () => {
