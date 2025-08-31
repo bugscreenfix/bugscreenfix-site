@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bug Screen Fix — Quote & Booking</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;background:#fafafa;color:#111}
+    .container{max-width:72rem;margin:0 auto;padding:0 1rem}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:16px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:10px 16px}
+  </style>
+</head>
+<body class="min-h-screen bg-neutral-50 text-neutral-900">
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-neutral-200">
+    <div class="container py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-xl bg-lime-500 grid place-items-center font-bold text-white">B</div>
+        <div class="font-semibold">Bug Screen Fix</div>
+      </div>
+      <a href="#book" class="btn bg-lime-600 text-white hover:bg-lime-700 transition">Get instant quote</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-lime-100 via-white to-white"></div>
+      <div class="relative container py-10 md:py-16 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Screens fixed, bugs stopped.</h1>
+          <p class="mt-4 text-lg text-neutral-700">Fast, mobile window and door screen repair in the KC Northland. Upfront prices, on-site service, and easy online scheduling. Property managers and HOAs welcome * special bulk discounts available.</p>
+          <p class=\"mt-8 text-center font-semibold text-lime-700\">Make it ok to open those windows and enjoy that fresh air</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#pricing" class="btn bg-neutral-900 text-white hover:bg-neutral-800">See pricing</a>
+            <a href="#book" class="btn bg-lime-600 text-white hover:bg-lime-700">Schedule now</a>
+          </div>
+        </div>
+        <div class="md:justify-self-end w-full">
+          <div class="card shadow-sm">
+            <img src="images/hero.jpg" alt="Local handyman repairing window screen" class="rounded-xl mb-3 w-full h-48 object-cover"/>
+            <p class="text-sm text-neutral-600">Local handyman, authentic screen repair service.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-12 border-t border-neutral-200">
+      <div class="container">
+        <h2 class="text-3xl font-extrabold">Simple, fair pricing</h2>
+        <p class="text-neutral-700 mt-2">Prices include standard fiberglass materials and base labor before any mesh upgrades or discounts.</p>
+        <div class="mt-8 grid md:grid-cols-4 gap-5">
+          <div class="card">
+            <div class="text-lg font-semibold">Standard window</div>
+            <div class="mt-1 text-3xl font-extrabold tracking-tight">$39</div>
+            <div class="text-xs text-neutral-500 mt-1">Up to ~36" width</div>
+          </div>
+          <div class="card">
+            <div class="text-lg font-semibold">Large window</div>
+            <div class="mt-1 text-3xl font-extrabold tracking-tight">$59</div>
+            <div class="text-xs text-neutral-500 mt-1">~36–60" width</div>
+          </div>
+          <div class="card">
+            <div class="text-lg font-semibold">Patio door rescreen</div>
+            <div class="mt-1 text-3xl font-extrabold tracking-tight">$99</div>
+            <div class="text-xs text-neutral-500 mt-1">Most sliders</div>
+          </div>
+          <div class="card">
+            <div class="text-lg font-semibold">New sliding screen door</div>
+            <div class="mt-1 text-3xl font-extrabold tracking-tight">$249</div>
+            <div class="text-xs text-neutral-500 mt-1">Includes labor and standard materials</div>
+          </div>
+        </div>
+        <p class=\"mt-8 text-center font-semibold text-lime-700\">Make it ok to open those windows and enjoy that fresh air</p>
+        <div class="mt-6 text-sm text-neutral-600">
+          <strong>Bulk discounts available</strong> for HOAs and housing managers. Ask us about multi unit pricing.
+        </div>
+        <!-- Service Image -->
+        <div class="card mt-8">
+          <img src="images/tech.jpg" alt="Handyman rescreening a sliding door" class="rounded-xl mb-3 w-full h-64 object-cover"/>
+          <p class="text-sm text-neutral-600">Professional rescreening service done on-site.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking -->
+    <section id="book" class="py-12 border-t border-neutral-200 bg-white">
+      <div class="container">
+        <h2 class="text-3xl font-extrabold">Get an instant quote and book</h2>
+        <p class="text-neutral-700 mt-2">Pick your counts below. <strong>Bulk discounts are available for HOAs and housing managers. We will coordinate multi unit scheduling.</strong></p>
+
+        <!-- Instant Quote Calculator -->
+        <div class="card mt-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="text-sm font-medium">Windows</label>
+              <div class="mt-2 flex items-center gap-2">
+                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyWindows',-1)">−</button>
+                <input id="qtyWindows" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" oninput="calc()" />
+                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyWindows',1)">+</button>
+              </div>
+              <div class="text-xs text-neutral-500 mt-1">$39 each (standard size)</div>
+            </div>
+            <div>
+              <label class="text-sm font-medium">Screen doors</label>
+              <div class="mt-2 flex items-center gap-2">
+                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyDoors',-1)">−</button>
+                <input id="qtyDoors" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" oninput="calc()" />
+                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyDoors',1)">+</button>
+              </div>
+              <div class="text-xs text-neutral-500 mt-1">$99 each (patio/sliding)</div>
+            </div>
+          </div>
+
+          <div class="mt-4 flex items-center gap-2">
+            <input id="isHOA" type="checkbox" class="h-5 w-5" onchange="calc()" />
+            <label for="isHOA" class="text-sm">I am an <strong>HOA</strong> or <strong>housing manager</strong></label>
+          </div>
+
+          <div id="hoaMsg" class="hidden mt-2 text-xs text-lime-700 bg-lime-50 border border-lime-200 rounded-xl p-3">
+            Bulk discounts are available for HOAs and housing managers. We will coordinate multi unit scheduling.
+          </div>
+
+          <div class="mt-4 bg-neutral-50 border p-4 rounded-xl text-sm">
+            <div class="flex items-center justify-between mt-1"><div>Items subtotal</div><div>$<span id="itemsSubtotal">0.00</span></div></div>
+            <div id="bulkRow" class="hidden flex items-center justify-between mt-1 text-lime-700"><div class="font-medium">Bulk discount applied</div><div>- $<span id="bulkDiscount">0.00</span> <span class="ml-2 text-xs bg-lime-100 text-lime-800 rounded-full px-2 py-0.5" id="bulkBadge"></span></div></div>
+            <div class="flex items-center justify-between mt-1"><div>Subtotal after discount</div><div>$<span id="afterDiscount">0.00</span></div></div>
+
+            <!-- Upsell: encourage adding items to unlock discount -->
+            <div id="upsellRow" class="hidden mt-2 border border-amber-200 bg-amber-50 text-amber-900 rounded-xl p-3">
+              <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                <div class="text-sm"><span class="font-semibold">Add <span id="upsellNeed">0</span> more</span> to unlock bulk discount (<span id="upsellRate">10%</span>). Save about <span class="font-semibold">$<span id="upsellSave">0.00</span></span>. New est. total ≈ $<span id="upsellNewTotal">0.00</span></div>
+                <div class="flex gap-2">
+                  <button type="button" id="upsellAddWindows" class="px-3 py-2 rounded-xl bg-amber-600 text-white hover:bg-amber-700">Add to windows</button>
+                  <button type="button" id="upsellAddDoors" class="px-3 py-2 rounded-xl bg-amber-600 text-white hover:bg-amber-700">Add to doors</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-3"><div>Service fee to reach ~$99 (cap $35)</div><div>$<span id="serviceFee">0.00</span></div></div>
+            <div class="mt-2 border-t pt-3 flex items-center justify-between font-semibold text-lg"><div>Estimated total</div><div>$<span id="finalTotal">0.00</span></div></div>
+            <div class="text-[11px] text-neutral-500 mt-1">Small jobs may include a service fee up to $35 to bring the ticket near $99.</div>
+          </div>
+        </div>
+
+        <!-- Materials note + opt in -->
+        <div class="mt-8 p-6 bg-indigo-600 text-yellow-200 rounded-2xl shadow-md text-xl font-bold text-center">
+          * Make it ok to open those windows and enjoy that fresh air *
+        </div>
+        <p class="mt-4 text-sm text-neutral-700">Quote shown is for standard fiberglass mesh. Other screen types (pet resistant, solar, etc.) are available. Our installer will check for areas prone to pet or sun damage and discuss pet screen options on-site. Upsells are only based on need or by client request.</p>
+        <div class="mt-4 card border border-lime-200 bg-lime-50 p-4 rounded-xl">
+          <label class="flex items-start gap-2 text-sm text-neutral-800">
+            <input type="checkbox" id="optOtherMaterials" class="mt-1 h-5 w-5 text-lime-600 border-neutral-300 rounded focus:ring-lime-500" onchange="syncCalendlyNote()">
+            <span>I would like to discuss other screen materials or have specific needs (e.g., pet resistant, solar). Please review options with me on-site.</span>
+          </label>
+          <div class="mt-3">
+            <label for="otherMaterialsDetails" class="block text-sm font-medium text-neutral-700">Additional details (optional)</label>
+            <textarea id="otherMaterialsDetails" rows="3" class="mt-1 w-full rounded-xl border border-neutral-300 p-2 text-sm focus:ring-lime-500 focus:border-lime-500" placeholder="e.g., cats scratch patio door, strong sun on west side..."></textarea>
+          </div>
+        </div>
+
+        <!-- Calendly Embed -->
+        <div class="card mt-6">
+          <h3 class="text-lg font-semibold">Book your spot</h3>
+          <p class="text-sm text-neutral-600">Choose a time that works for you. You will receive an automatic email confirmation.</p>
+          <iframe id="calendlyFrame" src="https://calendly.com/installer-bugscreenfix/30min?hide_event_type_details=1&hide_gdpr_banner=1" width="100%" height="700" frameborder="0" class="mt-3"></iframe>
+        </div>
+
+        <!-- Before/After Image -->
+        <div class="card mt-8">
+          <img src="images/before-after.jpg" alt="Before and after of window screen repair" class="rounded-xl mb-3 w-full h-64 object-cover"/>
+          <p class="text-sm text-neutral-600">Before and after comparison: torn screen vs. clean screen.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-10 border-t border-neutral-200 bg-neutral-50">
+    <div class="container grid md:grid-cols-3 gap-6 text-sm">
+      <div>
+        <div class="font-semibold">Bug Screen Fix</div>
+        <div class="text-neutral-600 mt-2">Mobile window and door screen repair serving Liberty, KC Northland, and nearby.</div>
+      </div>
+      <div>
+        <div class="font-semibold">Contact</div>
+        <div class="mt-2 grid gap-1 text-neutral-700">
+          <div>Phone: (913) 735-4947</div>
+          <div>Email: <a class="underline" href="mailto:installer@bugscreenfix.com">installer@bugscreenfix.com</a> <span class="text-xs text-neutral-500">(For fastest response, email us!)</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="font-semibold">Links</div>
+        <ul class="mt-2 grid gap-1 text-neutral-700">
+          <li><a class="underline" href="#pricing">Pricing</a></li>
+          <li><a class="underline" href="#book">Schedule</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container mt-6 text-xs text-neutral-500">© <span id="year"></span> Bug Screen Fix. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Config
+    const PRICES = { window: 39, door: 99, minimumTicket: 99, serviceCap: 35 };
+    const DISCOUNT_THRESHOLD = 30; // apply discount at 30+ combined items
+    const DISCOUNT_RATE = 0.10;   // default 10%
+    let lastUpsellNeed = 0; // for add buttons
+
+    const $ = id => document.getElementById(id);
+    const setText = (id, val) => { const el = $(id); if (el) el.textContent = (typeof val === 'number' ? val.toFixed(2) : val); };
+    function valInt(id){ return Math.max(0, parseInt($(id).value || '0', 10)); }
+    function adjust(id, delta){ const el = $(id); const v = Math.max(0, (parseInt(el.value || '0', 10) || 0) + delta); el.value = v; calc(); }
+
+    function calc(){
+      const qW = valInt('qtyWindows');
+      const qD = valInt('qtyDoors');
+      const isHOA = $('isHOA').checked;
+      const itemsSubtotal = qW * PRICES.window + qD * PRICES.door;
+      const totalItems = qW + qD;
+
+      let discount = 0;
+      let discountApplied = false;
+      if(isHOA && totalItems >= DISCOUNT_THRESHOLD){
+        discount = itemsSubtotal * DISCOUNT_RATE;
+        discountApplied = true;
+      }
+
+      const afterDiscount = itemsSubtotal - discount;
+      let serviceFee = 0;
+      if(afterDiscount > 0 && afterDiscount < PRICES.minimumTicket){
+        serviceFee = Math.min(PRICES.serviceCap, PRICES.minimumTicket - afterDiscount);
+      }
+
+      const finalTotal = afterDiscount + serviceFee;
+
+      // Upsell logic: only show upsell if HOA checked and under threshold
+      const need = Math.max(0, DISCOUNT_THRESHOLD - totalItems);
+      lastUpsellNeed = need;
+      if(isHOA && itemsSubtotal > 0 && need > 0){
+        const projectedItems = itemsSubtotal + need * PRICES.window; // assume windows for projection
+        const projectedDiscount = projectedItems * DISCOUNT_RATE;
+        const projectedAfterDiscount = projectedItems - projectedDiscount;
+        let projectedService = 0;
+        if(projectedAfterDiscount > 0 && projectedAfterDiscount < PRICES.minimumTicket){
+          projectedService = Math.min(PRICES.serviceCap, PRICES.minimumTicket - projectedAfterDiscount);
+        }
+        const projectedFinal = projectedAfterDiscount + projectedService;
+
+        setText('upsellNeed', need);
+        setText('upsellRate', Math.round(DISCOUNT_RATE*100) + '%');
+        setText('upsellSave', projectedDiscount);
+        setText('upsellNewTotal', projectedFinal);
+        $('upsellRow').classList.remove('hidden');
+      } else {
+        $('upsellRow').classList.add('hidden');
+      }
+
+      setText('itemsSubtotal', itemsSubtotal);
+      setText('bulkDiscount', discount);
+      setText('afterDiscount', afterDiscount);
+      setText('serviceFee', serviceFee);
+      setText('finalTotal', finalTotal);
+
+      $('hoaMsg').classList.toggle('hidden', !isHOA);
+      $('bulkRow').classList.toggle('hidden', !discountApplied);
+      if(discountApplied){ setText('bulkBadge', Math.round(DISCOUNT_RATE*100) + '% · ' + DISCOUNT_THRESHOLD + '+ items'); }
+    }
+
+    function syncCalendlyNote(){
+      const cb = $('optOtherMaterials');
+      const details = $('otherMaterialsDetails');
+      const ifr = $('calendlyFrame');
+      if(!ifr) return;
+      const url = new URL(ifr.src);
+      // remove prior a1/a2
+      url.searchParams.delete('a1');
+      url.searchParams.delete('a2');
+      if(cb && cb.checked){ url.searchParams.set('a1', 'Interested in other screen materials'); }
+      if(details && details.value.trim().length){ url.searchParams.set('a2', details.value.trim()); }
+      ifr.src = url.toString();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Year in footer
+      const yearEl = document.getElementById('year');
+      if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Wire upsell buttons
+      const addW = document.getElementById('upsellAddWindows');
+      const addD = document.getElementById('upsellAddDoors');
+      if(addW){ addW.addEventListener('click', () => { const el = $('qtyWindows'); el.value = (parseInt(el.value || '0', 10) || 0) + lastUpsellNeed; calc(); }); }
+      if(addD){ addD.addEventListener('click', () => { const el = $('qtyDoors'); el.value = (parseInt(el.value || '0', 10) || 0) + lastUpsellNeed; calc(); }); }
+
+      // Sync Calendly when details edited
+      const details = $('otherMaterialsDetails');
+      if(details){ details.addEventListener('change', syncCalendlyNote); details.addEventListener('blur', syncCalendlyNote); }
+
+      calc();
+    });
+  </script>
+</body>
+</html>
