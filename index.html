@@ -111,6 +111,14 @@
               <div class="text-xs text-neutral-500 mt-1">$59 each</div>
             </div>
           </div>
+
+          <!-- Totals Panel -->
+          <div class="mt-4 bg-neutral-50 border p-4 rounded-xl text-sm">
+            <div class="flex items-center justify-between mt-1"><div>Items subtotal</div><div>$<span id="itemsSubtotal">0.00</span></div></div>
+            <div class="flex items-center justify-between mt-3"><div>Service fee to reach ~$99 (cap $35)</div><div>$<span id="serviceFee">0.00</span></div></div>
+            <div class="mt-2 border-t pt-3 flex items-center justify-between font-semibold text-lg"><div>Estimated total</div><div>$<span id="finalTotal">0.00</span></div></div>
+            <div class="text-[11px] text-neutral-500 mt-1">Small jobs may include a service fee up to $35 to bring the ticket near $99.</div>
+          </div>
         </div>
 
         <!-- Before/After Image -->
@@ -152,26 +160,30 @@
 
     const $ = id => document.getElementById(id);
     const setText = (id, val) => { const el = $(id); if (el) el.textContent = (typeof val === 'number' ? val.toFixed(2) : val); };
-    function valInt(id){ return Math.max(0, parseInt($(id).value || '0', 10)); }
+    function valInt(id){ return Math.max(0, parseInt($(id)?.value || '0', 10)); }
     function adjust(id, delta){ const el = $(id); const v = Math.max(0, (parseInt(el.value || '0', 10) || 0) + delta); el.value = v; calc(); }
 
     function calc(){
       const qW = valInt('qtyWindows');
       const qO = valInt('qtyOversized');
-      const qD = 0; // not shown in this simplified calc example
-      const itemsSubtotal = qW*PRICES.window + qO*PRICES.oversized + qD*PRICES.door;
+      const itemsSubtotal = qW*PRICES.window + qO*PRICES.oversized;
 
       let serviceFee = 0;
       if(itemsSubtotal > 0 && itemsSubtotal < PRICES.minimumTicket){
         serviceFee = Math.min(PRICES.serviceCap, PRICES.minimumTicket - itemsSubtotal);
       }
-
       const finalTotal = itemsSubtotal + serviceFee;
-      console.log("Subtotal:", itemsSubtotal, "Service Fee:", serviceFee, "Final Total:", finalTotal);
+
+      setText('itemsSubtotal', itemsSubtotal);
+      setText('serviceFee', serviceFee);
+      setText('finalTotal', finalTotal);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       const yearEl = document.getElementById('year');
+      if(yearEl) yearEl.textContent = new Date().getFullYear();
+      calc();
+    });
       if(yearEl) yearEl.textContent = new Date().getFullYear();
       calc();
     });
