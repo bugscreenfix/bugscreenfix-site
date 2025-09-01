@@ -224,7 +224,7 @@
       serviceCap: 35,
     };
     const CAL_BASE = 'https://cal.com/bugscreenfix';
-    const USE_EVENT_SLUGS = true; // flip to true when you create install-30/install-45/... in Cal.com
+    const USE_EVENT_SLUGS = true; // requires install-30/install-45/... in Cal.com
     const EVENT_MAP = [
       {maxMin:30, slug:'install-30'},
       {maxMin:45, slug:'install-45'},
@@ -268,34 +268,24 @@
       return OK_CITIES.includes(city) || OK_ZIPS.includes(zip);
     }
 
+    // Duration: 30 for first item +15 each add'l, +15 per window frame, +30 per door frame
     function computeDurationMin(){
-      const qW  = valInt('qtyWindows');           // standard windows (rescreen)
-      const qDR = valInt('qtyDoorRescreen');      // patio door rescreens
-      const qFW = valInt('qtyFrameWindow');       // window full frame replacements
-      const qFD = valInt('qtyFrameDoor');         // door full frame replacements
-
-      const totalUnits = qW + qDR + qFW + qFD;
-      if(totalUnits <= 0) return 30;
-
-      // Base time: 30 min for first item, +15 min for each additional item
-      let minutes = 30 + 15 * (totalUnits - 1);
-
-      // Extra time for frame work per requirement:
-      // +15 min for EACH window frame replacement
-      // +30 min for EACH screen door frame replacement
-      minutes += 15 * qFW;
-      minutes += 30 * qFD;
-
-      // round up to nearest 15
-      return Math.ceil(minutes / 15) * 15;
+      const qW  = valInt('qtyWindows');
+      const qDR = valInt('qtyDoorRescreen');
+      const qFW = valInt('qtyFrameWindow');
+      const qFD = valInt('qtyFrameDoor');
+      const total = qW + qDR + qFW + qFD;
+      if(total<=0) return 30;
+      let m = 30 + 15*(total-1);
+      m += 15*qFW; // extra per window frame
+      m += 30*qFD; // extra per door frame
+      return Math.ceil(m/15)*15;
     }
 
     function pickEventUrl(minutes){
-      if(!USE_EVENT_SLUGS) return CAL_BASE; // simple, always works
+      if(!USE_EVENT_SLUGS) return CAL_BASE; // simple mode
       let slug = EVENT_MAP[EVENT_MAP.length-1].slug;
-      for(const row of EVENT_MAP){ if(minutes <= row.maxMin){ slug = row.slug; break; } }
-      return `${CAL_BASE}/${slug}`;
-    } }
+      for(const row of EVENT_MAP){ if(minutes<=row.maxMin){ slug=row.slug; break; } }
       return `${CAL_BASE}/${slug}`;
     }
 
@@ -328,9 +318,7 @@
       ].filter(Boolean).join(' | ');
 
       url.searchParams.set('name', name);
-      // Pass address into Cal.com location (event location is set to in-person in Cal.com)
-      const loc = `${addr}, ${city} ${zip}`;
-      url.searchParams.set('location', loc);
+      url.searchParams.set('location', `${addr}, ${city} ${zip}`); // pass address to Cal.com location
       url.searchParams.set('notes', summary);
       window.location.href = url.toString();
     }
