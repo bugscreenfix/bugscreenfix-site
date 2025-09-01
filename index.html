@@ -57,7 +57,7 @@
           <div class="card"><div class="text-lg font-semibold">Patio door rescreen</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$99</div><div class="text-xs text-neutral-500 mt-1">Most sliders</div></div>
           <div class="card"><div class="text-lg font-semibold">New sliding screen door</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$249</div><div class="text-xs text-neutral-500 mt-1">Includes labor and standard materials</div></div>
         </div>
-        <div class="mt-6 text-sm text-neutral-600"><strong>Bulk discounts available</strong> for HOAs and housing managers. Ask us about multi‑unit pricing.</div>
+        <div class="mt-6 text-sm text-neutral-600"><strong>Bulk discounts available</strong> for HOAs, builders, and contractors. Ask us about multi‑unit pricing.</div>
         <div class="card mt-8">
           <img src="images/tech.jpg" alt="Handyman rescreening a sliding door" class="rounded-xl mb-3 w-full h-64 object-cover"/>
           <p class="text-sm text-neutral-600">Professional rescreening service done on‑site.</p>
@@ -71,45 +71,79 @@
         <h2 class="text-3xl font-extrabold">Get an instant quote and book</h2>
         <p class="text-neutral-700 mt-2">Pick your counts below. Totals update instantly. You can also book frame rebuilds without a quote.</p>
 
+        <!-- Contact & Address -->
+        <div class="card mt-6">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm font-medium">Full name</label>
+              <input id="custName" class="mt-1 w-full rounded-xl border p-2" type="text" placeholder="Jane Smith" />
+            </div>
+            <div>
+              <label class="text-sm font-medium">Mobile phone</label>
+              <input id="custPhone" class="mt-1 w-full rounded-xl border p-2" type="tel" placeholder="(913) 555-1234" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="text-sm font-medium">Service address</label>
+              <input id="custAddress" class="mt-1 w-full rounded-xl border p-2" type="text" placeholder="123 Main St" />
+            </div>
+            <div>
+              <label class="text-sm font-medium">City</label>
+              <select id="custCity" class="mt-1 w-full rounded-xl border p-2">
+                <option value="">Select</option>
+                <option>Liberty</option>
+                <option>Kansas City (Northland)</option>
+                <option>Gladstone</option>
+                <option>Claycomo</option>
+                <option>Smithville</option>
+                <option>Pleasant Valley</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-sm font-medium">ZIP</label>
+              <input id="custZip" class="mt-1 w-full rounded-xl border p-2" type="text" placeholder="64157" />
+            </div>
+          </div>
+          <p class="text-xs text-neutral-500 mt-2">Service area: within ~20 minutes of I‑35 & I‑435 (Liberty/Northland). If you’re unsure, choose your city/ZIP and we’ll confirm.</p>
+        </div>
+
         <!-- Quote Calculator -->
         <div class="card mt-6 space-y-6">
-          <!-- counts -->
           <div>
             <label class="text-sm font-medium">Windows (up to 60&quot;) — $39</label>
             <div class="mt-2 flex items-center gap-2">
-              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyWindows',-1)" aria-label="decrease windows">−</button>
-              <input id="qtyWindows" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" step="1" value="0" />
-              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyWindows',1)" aria-label="increase windows">+</button>
+              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyWindows',-1)">−</button>
+              <input id="qtyWindows" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" />
+              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyWindows',1)">+</button>
             </div>
           </div>
           <div>
             <label class="text-sm font-medium">Oversized windows (over 60&quot;) — $59</label>
             <div class="mt-2 flex items-center gap-2">
-              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyOversized',-1)" aria-label="decrease oversized">−</button>
-              <input id="qtyOversized" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" step="1" value="0" />
-              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyOversized',1)" aria-label="increase oversized">+</button>
+              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyOversized',-1)">−</button>
+              <input id="qtyOversized" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" />
+              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyOversized',1)">+</button>
             </div>
           </div>
 
-          <!-- affinity checkboxes -->
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="card">
-              <div class="text-sm font-semibold mb-2">Who are you?</div>
-              <label class="flex items-center gap-2 text-sm"><input id="isHOA" type="checkbox" class="h-4 w-4" onchange="syncNotes()"/> HOA / Property manager</label>
-              <label class="flex items-center gap-2 text-sm mt-2"><input id="isBuilder" type="checkbox" class="h-4 w-4" onchange="syncNotes()"/> Builder</label>
-              <label class="flex items-center gap-2 text-sm mt-2"><input id="isContractor" type="checkbox" class="h-4 w-4" onchange="syncNotes()"/> Contractor</label>
-            </div>
-            <div class="card">
-              <div class="text-sm font-semibold mb-2">Materials & durability</div>
-              <label class="flex items-start gap-2 text-sm">
-                <input id="optMaterials" type="checkbox" class="mt-1 h-4 w-4" onchange="syncNotes()"/>
-                <span>I want to discuss tougher screen materials (e.g., pet‑resistant, solar). Please review options with me on‑site.</span>
-              </label>
-              <textarea id="materialsNotes" class="mt-2 w-full rounded-xl border p-2 text-sm" rows="3" placeholder="Optional: tell us about pets, sun exposure, or other needs" oninput="syncNotes()"></textarea>
-            </div>
+          <!-- Affiliation -->
+          <div class="card">
+            <div class="text-sm font-semibold mb-2">Who are you?</div>
+            <label class="flex items-center gap-2 text-sm"><input id="isHOA" type="checkbox" class="h-4 w-4"/> HOA / Property Manager</label>
+            <label class="flex items-center gap-2 text-sm mt-2"><input id="isBuilder" type="checkbox" class="h-4 w-4"/> Builder</label>
+            <label class="flex items-center gap-2 text-sm mt-2"><input id="isContractor" type="checkbox" class="h-4 w-4"/> Contractor</label>
           </div>
 
-          <!-- totals -->
+          <!-- Materials -->
+          <div class="card">
+            <div class="text-sm font-semibold mb-2">Materials & durability</div>
+            <label class="flex items-start gap-2 text-sm">
+              <input id="optMaterials" type="checkbox" class="mt-1 h-4 w-4"/>
+              <span>I want to discuss tougher screen materials (pet‑resistant, solar). Please review options with me on‑site.</span>
+            </label>
+            <textarea id="materialsNotes" class="mt-2 w-full rounded-xl border p-2 text-sm" rows="3" placeholder="Optional: tell us about pets, sun exposure, or other needs"></textarea>
+          </div>
+
+          <!-- Totals -->
           <div class="mt-2 bg-neutral-50 border p-4 rounded-xl text-sm">
             <div class="flex items-center justify-between mt-1"><div>Items subtotal</div><div>$<span id="itemsSubtotal">0.00</span></div></div>
             <div class="flex items-center justify-between mt-3"><div>Service fee to reach ~$99 (cap $35)</div><div>$<span id="serviceFee">0.00</span></div></div>
@@ -124,9 +158,9 @@
             <div>
               <label class="text-sm font-medium">Screen/door frame rebuilds (custom pricing on‑site)</label>
               <div class="mt-2 flex items-center gap-2">
-                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyRebuilds',-1)" aria-label="decrease rebuilds">−</button>
-                <input id="qtyRebuilds" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" step="1" value="0" />
-                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyRebuilds',1)" aria-label="increase rebuilds">+</button>
+                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyRebuilds',-1)">−</button>
+                <input id="qtyRebuilds" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" />
+                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyRebuilds',1)">+</button>
               </div>
               <p class="text-xs text-neutral-500 mt-1">Don't need a quote? Book now and we'll price on‑site.</p>
             </div>
@@ -134,18 +168,27 @@
           </div>
         </div>
 
-        <!-- Calendly Embed -->
-        <div class="card mt-6">
-          <h3 class="text-lg font-semibold">Book your spot</h3>
-          <p class="text-sm text-neutral-600">Choose a time that works for you. You will receive an automatic email confirmation.</p>
-          <iframe id="calendlyFrame" src="https://calendly.com/installer-bugscreenfix/30min?hide_event_type_details=1&hide_gdpr_banner=1" width="100%" height="700" frameborder="0" class="mt-3"></iframe>
-          <div class="text-xs text-neutral-500 mt-2">If the calendar doesn’t load, <a class="underline" target="_blank" href="https://calendly.com/installer-bugscreenfix/30min">open Calendly</a>.</div>
-        </div>
-
-        <!-- Before/After Image -->
-        <div class="card mt-8">
-          <img src="images/before-after.jpg" alt="Before and after of window screen repair" class="rounded-xl mb-3 w-full h-64 object-cover"/>
-          <p class="text-sm text-neutral-600">Before and after comparison: torn screen vs. clean screen.</p>
+        <!-- Cal.com Routing -->
+        <div class="card mt-6 space-y-4">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm font-medium">Full name</label>
+              <input id="custName" class="mt-1 w-full rounded-xl border p-2" type="text" placeholder="Jane Smith">
+            </div>
+            <div>
+              <label class="text-sm font-medium">Mobile phone</label>
+              <input id="custPhone" class="mt-1 w-full rounded-xl border p-2" type="tel" placeholder="(555) 555-1234">
+            </div>
+            <div class="md:col-span-2">
+              <label class="text-sm font-medium">Service address</label>
+              <input id="custAddress" class="mt-1 w-full rounded-xl border p-2" type="text" placeholder="123 Main St, Kansas City, MO 64157">
+            </div>
+          </div>
+          <div class="mt-3 flex gap-3">
+            <button type="button" class="btn bg-neutral-900 text-white hover:bg-neutral-800" onclick="goToCal()">Choose a time</button>
+            <a class="btn border hover:bg-neutral-100" target="_blank" href="https://cal.com/bugscreenfix">Open Cal.com</a>
+          </div>
+          <p class="text-xs text-neutral-500 mt-2">You’ll see available times on Cal.com. Your quote details, contact info, and any HOA/materials info will be included with the booking.</p>
         </div>
       </div>
     </section>
@@ -176,15 +219,12 @@
   </footer>
 
   <script>
-    // Pricing config
     const PRICES = { window: 39, oversized: 59, minimumTicket: 99, serviceCap: 35 };
 
-    // Helpers
     const $ = id => document.getElementById(id);
     const setText = (id, val) => { const el = $(id); if (el) el.textContent = (typeof val === 'number' ? val.toFixed(2) : val); };
     function valInt(id){ const el = $(id); return el ? Math.max(0, parseInt(el.value || '0', 10)) : 0; }
 
-    // + / - control
     function adjust(id, delta){
       const el = $(id);
       if (!el) return;
@@ -194,7 +234,6 @@
       calc();
     }
 
-    // Calculator
     function calc(){
       const qW = valInt('qtyWindows');
       const qO = valInt('qtyOversized');
@@ -209,53 +248,165 @@
       setText('itemsSubtotal', itemsSubtotal);
       setText('serviceFee', serviceFee);
       setText('finalTotal', finalTotal);
-
-      // Keep Calendly notes synced when quantities change
-      syncNotes();
     }
 
-    // Sync notes/flags into Calendly query params so they show in booking
-    function syncNotes(){
-      const ifr = $('calendlyFrame');
-      if(!ifr) return;
-      try{
-        const u = new URL(ifr.src);
-        // Who are you flags
-        const tags = [];
-        if($('isHOA')?.checked) tags.push('HOA/Property Manager');
-        if($('isBuilder')?.checked) tags.push('Builder');
-        if($('isContractor')?.checked) tags.push('Contractor');
-        u.searchParams.set('a1', tags.join(', ') || '');
-        // Materials interest
-        const wants = $('optMaterials')?.checked;
-        const note = $('materialsNotes')?.value?.trim() || '';
-        const msg = wants ? ('Materials: discuss tougher options. '+ (note?('Notes: '+note):'')) : '';
-        u.searchParams.set('a2', msg);
-        ifr.src = u.toString();
-      }catch(e){}
-    }
-
-    // Quick-book rebuilds
     function bookRebuilds(){
       const count = valInt('qtyRebuilds');
-      const ifr = $('calendlyFrame');
-      if(!ifr){ window.location.hash = '#book'; return; }
-      try{
-        const u = new URL(ifr.src);
-        u.searchParams.set('a3', 'Frame rebuilds: ' + count);
-        ifr.src = u.toString();
-      }catch(e){}
-      ifr.scrollIntoView({behavior:'smooth', block:'start'});
+      const summary = `Frame rebuilds: ${count}`;
+      const base = pickEventUrl(30); // default to shortest slot
+      const url = new URL(base);
+      url.searchParams.set('notes', summary);
+      window.location.href = url.toString();
     }
 
-    // Init
     document.addEventListener('DOMContentLoaded', () => {
       const y = $('year'); if(y) y.textContent = new Date().getFullYear();
-      // input listeners keep totals and notes in sync
-      ['qtyWindows','qtyOversized','materialsNotes'].forEach(id => { const el=$(id); if(el){ el.addEventListener('input', ()=>{calc();}); }});
-      ['isHOA','isBuilder','isContractor','optMaterials'].forEach(id => { const el=$(id); if(el){ el.addEventListener('change', syncNotes); }});
+      ['qtyWindows','qtyOversized'].forEach(id => { const el=$(id); if(el){ el.addEventListener('input', calc); }});
       calc();
     });
+
+    // ---- Cal.com routing ----
+    const EVENT_MAP = [
+      {maxMin:30, slug:'install-30'},
+      {maxMin:45, slug:'install-45'},
+      {maxMin:60, slug:'install-60'},
+      {maxMin:75, slug:'install-75'},
+      {maxMin:90, slug:'install-90'},
+      {maxMin:105, slug:'install-105'},
+      {maxMin:120, slug:'install-120'}
+    ];
+
+    function computeDurationMin(){
+      const w = valInt('qtyWindows');
+      const o = valInt('qtyOversized');
+      // Treat rebuilds as a screen-equivalent for time estimate
+      const r = valInt('qtyRebuilds');
+      const total = w + o + r;
+      if(total <= 0) return 30;
+      const m = 30 + 15*(total-1);
+      return Math.ceil(m/15)*15;
+    }
+
+    function pickEventUrl(minutes){
+      let slug = EVENT_MAP[EVENT_MAP.length-1].slug;
+      for(const row of EVENT_MAP){ if(minutes <= row.maxMin){ slug = row.slug; break; } }
+      return `https://cal.com/bugscreenfix/${slug}`;
+    }
+
+    function goToCal(){
+      const name = ($('custName')?.value||'').trim();
+      const phone = ($('custPhone')?.value||'').trim();
+      const address = ($('custAddress')?.value||'').trim();
+      if(!name || !phone || !address){
+        alert('Please enter your name, phone, and service address before choosing a time.');
+        return;
+      }
+      const w = valInt('qtyWindows');
+      const o = valInt('qtyOversized');
+      const r = valInt('qtyRebuilds');
+      const tags = [];
+      if($('isHOA')?.checked) tags.push('HOA/PM');
+      if($('isBuilder')?.checked) tags.push('Builder');
+      if($('isContractor')?.checked) tags.push('Contractor');
+      const wants = $('optMaterials')?.checked;
+      const note = ($('materialsNotes')?.value||'').trim();
+
+      const minutes = computeDurationMin();
+      const base = pickEventUrl(minutes);
+      const url = new URL(base);
+      const summary = [
+        `Qty: ${w} std, ${o} oversize, ${r} rebuilds`,
+        tags.length?`Type: ${tags.join(', ')}`:'',
+        wants?`Materials: discuss tougher options`:'' ,
+        note?`Notes: ${note}`:'',
+        `Contact: ${name}, ${phone}`,
+        `Address: ${address}`
+      ].filter(Boolean).join(' | ');
+      url.searchParams.set('name', name);
+      url.searchParams.set('notes', summary);
+      window.location.href = url.toString();
+    }
+      calc();
+    });
+    // ---- Service area quick check ----
+    const OK_ZIPS = ['64068','64069','64116','64117','64118','64119','64155','64156','64157','64158','64165','64166'];
+    const OK_CITIES = ['Liberty','Kansas City (Northland)','Gladstone','Claycomo','Smithville','Pleasant Valley'];
+
+    function inServiceArea(){
+      const city = (document.getElementById('custCity')?.value||'').trim();
+      const zip  = (document.getElementById('custZip')?.value||'').trim();
+      return OK_CITIES.includes(city) || OK_ZIPS.includes(zip);
+    }
+
+    // ---- Cal.com routing (already present) overrides with contact info ----
+    function goToCal(){
+      const name = (document.getElementById('custName')?.value||'').trim();
+      const phone = (document.getElementById('custPhone')?.value||'').trim();
+      const addr = (document.getElementById('custAddress')?.value||'').trim();
+      const city = (document.getElementById('custCity')?.value||'').trim();
+      const zip  = (document.getElementById('custZip')?.value||'').trim();
+
+      if(!name || !phone || !addr || !city || !zip){
+        alert('Please complete name, phone, address, city, and ZIP.');
+        return;
+      }
+      if(!inServiceArea()){
+        alert('Sorry — we currently serve within ~20 minutes of I‑35 & I‑435 (Liberty/Northland). Please email installer@bugscreenfix.com if you’re just outside the area.');
+        return;
+      }
+
+      const w = valInt('qtyWindows');
+      const o = valInt('qtyOversized');
+      const r = valInt('qtyRebuilds');
+      const tags = [];
+      if(document.getElementById('isHOA')?.checked) tags.push('HOA/PM');
+      if(document.getElementById('isBuilder')?.checked) tags.push('Builder');
+      if(document.getElementById('isContractor')?.checked) tags.push('Contractor');
+      const wants = document.getElementById('optMaterials')?.checked;
+      const note  = (document.getElementById('materialsNotes')?.value||'').trim();
+
+      const minutes = computeDurationMin();
+      const base = pickEventUrl(minutes);
+      const url = new URL(base);
+
+      const summary = [
+        `Name: ${name}`,
+        `Phone: ${phone}`,
+        `Address: ${addr}, ${city} ${zip}`,
+        `Qty: ${w} std, ${o} oversize, ${r} rebuilds`,
+        tags.length?`Type: ${tags.join(', ')}`:'',
+        wants?`Materials: discuss tougher options`:'' ,
+        note?`Notes: ${note}`:''
+      ].filter(Boolean).join(' | ');
+
+      url.searchParams.set('name', name);
+      url.searchParams.set('notes', summary);
+      window.location.href = url.toString();
+    }
+
+    // Update rebuilds button to include contact + address
+    function bookRebuilds(){
+      const name = (document.getElementById('custName')?.value||'').trim();
+      const phone = (document.getElementById('custPhone')?.value||'').trim();
+      const addr = (document.getElementById('custAddress')?.value||'').trim();
+      const city = (document.getElementById('custCity')?.value||'').trim();
+      const zip  = (document.getElementById('custZip')?.value||'').trim();
+      const r = valInt('qtyRebuilds');
+      if(!name || !phone || !addr || !city || !zip){
+        alert('Please complete name, phone, address, city, and ZIP.');
+        return;
+      }
+      if(!inServiceArea()){
+        alert('Sorry — we currently serve within ~20 minutes of I‑35 & I‑435 (Liberty/Northland).');
+        return;
+      }
+      const base = pickEventUrl(30);
+      const url = new URL(base);
+      const summary = `Name: ${name} | Phone: ${phone} | Address: ${addr}, ${city} ${zip} | Frame rebuilds: ${r}`;
+      url.searchParams.set('name', name);
+      url.searchParams.set('notes', summary);
+      window.location.href = url.toString();
+    }
   </script>
 </body>
 </html>
