@@ -52,10 +52,10 @@
         <h2 class="text-3xl font-extrabold">Simple, fair pricing</h2>
         <p class="text-neutral-700 mt-2">Prices include standard fiberglass materials and base labor before any mesh upgrades or discounts.</p>
         <div class="mt-8 grid md:grid-cols-4 gap-5">
-          <div class="card"><div class="text-lg font-semibold">Standard window</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$39</div><div class="text-xs text-neutral-500 mt-1">Up to ~60&quot; width</div></div>
-          <div class="card"><div class="text-lg font-semibold">Oversized window</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$59</div><div class="text-xs text-neutral-500 mt-1">Over 60&quot; width</div></div>
-          <div class="card"><div class="text-lg font-semibold">Patio door rescreen</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$99</div><div class="text-xs text-neutral-500 mt-1">Most sliders</div></div>
-          <div class="card"><div class="text-lg font-semibold">New sliding screen door</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$249</div><div class="text-xs text-neutral-500 mt-1">Includes labor and standard materials</div></div>
+          <div class="card"><div class="text-lg font-semibold">Standard window (fiberglass)</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$39</div><div class="text-xs text-neutral-500 mt-1">Up to ~60&quot; width</div></div>
+          <div class="card"><div class="text-lg font-semibold">Patio door rescreen (fiberglass)</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$129</div><div class="text-xs text-neutral-500 mt-1">Existing door frame</div></div>
+          <div class="card"><div class="text-lg font-semibold">Full replacement frame + screen (window)</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$59</div><div class="text-xs text-neutral-500 mt-1">Standard window size</div></div>
+          <div class="card"><div class="text-lg font-semibold">Full replacement frame + screen (door)</div><div class="mt-1 text-3xl font-extrabold tracking-tight">$229</div><div class="text-xs text-neutral-500 mt-1">Standard screen door</div></div>
         </div>
         <div class="mt-6 text-sm text-neutral-600"><strong>Bulk discounts available</strong> for HOAs, builders, and contractors. Ask us about multi‑unit pricing.</div>
         <div class="card mt-8">
@@ -109,23 +109,50 @@
         <!-- Quote Calculator -->
         <div class="card mt-6 space-y-6">
           <div>
-            <label class="text-sm font-medium">Windows (up to 60&quot;) — $39</label>
+            <label class="text-sm font-medium">Standard window (fiberglass) — $39</label>
             <div class="mt-2 flex items-center gap-2">
               <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyWindows',-1)">−</button>
               <input id="qtyWindows" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" />
               <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyWindows',1)">+</button>
             </div>
           </div>
+
           <div>
-            <label class="text-sm font-medium">Oversized windows (over 60&quot;) — $59</label>
+            <label class="text-sm font-medium">Patio door rescreen (fiberglass) — $129</label>
             <div class="mt-2 flex items-center gap-2">
-              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyOversized',-1)">−</button>
-              <input id="qtyOversized" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" />
-              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyOversized',1)">+</button>
+              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyDoorRescreen',-1)">−</button>
+              <input id="qtyDoorRescreen" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" />
+              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyDoorRescreen',1)">+</button>
             </div>
           </div>
 
-          <!-- Affiliation & materials -->
+          <div>
+            <label class="text-sm font-medium">Full replacement frame + screen (window) — $59</label>
+            <div class="mt-2 flex items-center gap-2">
+              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyFrameWindow',-1)">−</button>
+              <input id="qtyFrameWindow" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" />
+              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyFrameWindow',1)">+</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium">Full replacement frame + screen (door) — $229</label>
+            <div class="mt-2 flex items-center gap-2">
+              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyFrameDoor',-1)">−</button>
+              <input id="qtyFrameDoor" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" />
+              <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyFrameDoor',1)">+</button>
+            </div>
+          </div>
+
+          <!-- Acknowledgment for pet‑resistant upgrade -->
+          <div class="card bg-amber-50 border-amber-200">
+            <label class="flex items-start gap-2 text-sm text-neutral-800">
+              <input type="checkbox" id="optPetAck" class="mt-1 h-4 w-4">
+              <span><strong>Acknowledgment:</strong> Pet‑resistant/heavy‑duty mesh is available. <u>Approx. +25%</u> will be calculated by the installer <u>only on upgraded items</u> and added to the final invoice if selected on‑site.</span>
+            </label>
+          </div>
+
+          <!-- Who are you & materials notes -->
           <div class="grid md:grid-cols-2 gap-4">
             <div class="card">
               <div class="text-sm font-semibold mb-2">Who are you?</div>
@@ -134,12 +161,8 @@
               <label class="flex items-center gap-2 text-sm mt-2"><input id="isContractor" type="checkbox" class="h-4 w-4"/> Contractor</label>
             </div>
             <div class="card">
-              <div class="text-sm font-semibold mb-2">Materials & durability</div>
-              <label class="flex items-start gap-2 text-sm">
-                <input id="optMaterials" type="checkbox" class="mt-1 h-4 w-4"/>
-                <span>I want to discuss tougher screen materials (pet‑resistant, solar). Please review options with me on‑site.</span>
-              </label>
-              <textarea id="materialsNotes" class="mt-2 w-full rounded-xl border p-2 text-sm" rows="3" placeholder="Optional: tell us about pets, sun exposure, or other needs"></textarea>
+              <div class="text-sm font-semibold mb-2">Materials & durability notes (optional)</div>
+              <textarea id="materialsNotes" class="mt-1 w-full rounded-xl border p-2 text-sm" rows="3" placeholder="Tell us about pets, sun exposure, or other needs"></textarea>
             </div>
           </div>
 
@@ -149,22 +172,6 @@
             <div class="flex items-center justify-between mt-3"><div>Service fee to reach ~$99 (cap $35)</div><div>$<span id="serviceFee">0.00</span></div></div>
             <div class="mt-2 border-t pt-3 flex items-center justify-between font-semibold text-lg"><div>Estimated total</div><div>$<span id="finalTotal">0.00</span></div></div>
             <div class="text-[11px] text-neutral-500 mt-1">Small jobs may include a service fee up to $35 to bring the ticket near $99.</div>
-          </div>
-        </div>
-
-        <!-- Frame rebuilds quick-book -->
-        <div class="card mt-6">
-          <div class="grid md:grid-cols-[1fr_auto] gap-4 items-end">
-            <div>
-              <label class="text-sm font-medium">Screen/door frame rebuilds (custom pricing on‑site)</label>
-              <div class="mt-2 flex items-center gap-2">
-                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyRebuilds',-1)">−</button>
-                <input id="qtyRebuilds" class="w-24 rounded-xl border p-2 text-center" type="number" min="0" value="0" />
-                <button type="button" class="px-3 py-2 rounded-xl border" onclick="adjust('qtyRebuilds',1)">+</button>
-              </div>
-              <p class="text-xs text-neutral-500 mt-1">Don't need a quote? Book now and we'll price on‑site.</p>
-            </div>
-            <button type="button" class="px-4 py-3 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800" onclick="bookRebuilds()">Book rebuilds without a quote</button>
           </div>
         </div>
 
@@ -207,7 +214,14 @@
 
   <script>
     // Pricing config
-    const PRICES = { window: 39, oversized: 59, minimumTicket: 99, serviceCap: 35 };
+    const PRICES = {
+      window: 39,
+      doorRescreen: 129,
+      frameWindow: 59,
+      frameDoor: 229,
+      minimumTicket: 99,
+      serviceCap: 35
+    };
 
     // Helpers
     const $ = id => document.getElementById(id);
@@ -227,8 +241,15 @@
     // Calculator
     function calc(){
       const qW = valInt('qtyWindows');
-      const qO = valInt('qtyOversized');
-      const itemsSubtotal = qW*PRICES.window + qO*PRICES.oversized;
+      const qDR = valInt('qtyDoorRescreen');
+      const qFW = valInt('qtyFrameWindow');
+      const qFD = valInt('qtyFrameDoor');
+
+      const itemsSubtotal =
+        qW * PRICES.window +
+        qDR * PRICES.doorRescreen +
+        qFW * PRICES.frameWindow +
+        qFD * PRICES.frameDoor;
 
       let serviceFee = 0;
       if(itemsSubtotal > 0 && itemsSubtotal < PRICES.minimumTicket){
@@ -263,10 +284,11 @@
     ];
 
     function computeDurationMin(){
-      const w = valInt('qtyWindows');
-      const o = valInt('qtyOversized');
-      const r = valInt('qtyRebuilds');
-      const total = w + o + r;
+      const qW = valInt('qtyWindows');
+      const qDR = valInt('qtyDoorRescreen');
+      const qFW = valInt('qtyFrameWindow');
+      const qFD = valInt('qtyFrameDoor');
+      const total = qW + qDR + qFW + qFD; // simple: each counts as one unit
       if(total <= 0) return 30;
       const m = 30 + 15*(total-1);
       return Math.ceil(m/15)*15;
@@ -294,15 +316,17 @@
         return;
       }
 
-      const w = valInt('qtyWindows');
-      const o = valInt('qtyOversized');
-      const r = valInt('qtyRebuilds');
+      const qW = valInt('qtyWindows');
+      const qDR = valInt('qtyDoorRescreen');
+      const qFW = valInt('qtyFrameWindow');
+      const qFD = valInt('qtyFrameDoor');
+
       const tags = [];
-      if(document.getElementById('isHOA')?.checked) tags.push('HOA/PM');
-      if(document.getElementById('isBuilder')?.checked) tags.push('Builder');
-      if(document.getElementById('isContractor')?.checked) tags.push('Contractor');
-      const wants = document.getElementById('optMaterials')?.checked;
+      if($('isHOA')?.checked) tags.push('HOA/PM');
+      if($('isBuilder')?.checked) tags.push('Builder');
+      if($('isContractor')?.checked) tags.push('Contractor');
       const note  = (document.getElementById('materialsNotes')?.value||'').trim();
+      const petAck = $('optPetAck')?.checked ? 'Pet mesh acknowledged (+~25% on selected items, finalized on-site)' : '';
 
       const minutes = computeDurationMin();
       const base = pickEventUrl(minutes);
@@ -312,9 +336,9 @@
         `Name: ${name}`,
         `Phone: ${phone}`,
         `Address: ${addr}, ${city} ${zip}`,
-        `Qty: ${w} std, ${o} oversize, ${r} rebuilds`,
+        `Qty: ${qW} std windows, ${qDR} patio doors, ${qFW} frame+screen (window), ${qFD} frame+screen (door)`,
         tags.length?`Type: ${tags.join(', ')}`:'',
-        wants?`Materials: discuss tougher options`:'' ,
+        petAck,
         note?`Notes: ${note}`:''
       ].filter(Boolean).join(' | ');
 
@@ -323,33 +347,10 @@
       window.location.href = url.toString();
     }
 
-    function bookRebuilds(){
-      const name = (document.getElementById('custName')?.value||'').trim();
-      const phone = (document.getElementById('custPhone')?.value||'').trim();
-      const addr = (document.getElementById('custAddress')?.value||'').trim();
-      const city = (document.getElementById('custCity')?.value||'').trim();
-      const zip  = (document.getElementById('custZip')?.value||'').trim();
-      const r = valInt('qtyRebuilds');
-      if(!name || !phone || !addr || !city || !zip){
-        alert('Please complete name, phone, address, city, and ZIP.');
-        return;
-      }
-      if(!inServiceArea()){
-        alert('Sorry — we currently serve within ~20 minutes of I‑35 & I‑435 (Liberty/Northland).');
-        return;
-      }
-      const base = pickEventUrl(30);
-      const url = new URL(base);
-      const summary = `Name: ${name} | Phone: ${phone} | Address: ${addr}, ${city} ${zip} | Frame rebuilds: ${r}`;
-      url.searchParams.set('name', name);
-      url.searchParams.set('notes', summary);
-      window.location.href = url.toString();
-    }
-
     // Init
     document.addEventListener('DOMContentLoaded', () => {
       const y = $('year'); if(y) y.textContent = new Date().getFullYear();
-      ['qtyWindows','qtyOversized'].forEach(id => { const el=$(id); if(el){ el.addEventListener('input', calc); }});
+      ['qtyWindows','qtyDoorRescreen','qtyFrameWindow','qtyFrameDoor'].forEach(id => { const el=$(id); if(el){ el.addEventListener('input', calc); }});
       calc();
     });
   </script>
