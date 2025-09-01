@@ -224,7 +224,7 @@
       serviceCap: 35,
     };
     const CAL_BASE = 'https://cal.com/bugscreenfix';
-    const USE_EVENT_SLUGS = false; // flip to true when you create install-30/install-45/... in Cal.com
+    const USE_EVENT_SLUGS = true; // flip to true when you create install-30/install-45/... in Cal.com
     const EVENT_MAP = [
       {maxMin:30, slug:'install-30'},
       {maxMin:45, slug:'install-45'},
@@ -269,15 +269,33 @@
     }
 
     function computeDurationMin(){
-      // 30 min for first item, +15 for each additional
-      const total = valInt('qtyWindows') + valInt('qtyDoorRescreen') + valInt('qtyFrameWindow') + valInt('qtyFrameDoor');
-      if(total<=0) return 30; const m=30+15*(total-1); return Math.ceil(m/15)*15;
+      const qW  = valInt('qtyWindows');           // standard windows (rescreen)
+      const qDR = valInt('qtyDoorRescreen');      // patio door rescreens
+      const qFW = valInt('qtyFrameWindow');       // window full frame replacements
+      const qFD = valInt('qtyFrameDoor');         // door full frame replacements
+
+      const totalUnits = qW + qDR + qFW + qFD;
+      if(totalUnits <= 0) return 30;
+
+      // Base time: 30 min for first item, +15 min for each additional item
+      let minutes = 30 + 15 * (totalUnits - 1);
+
+      // Extra time for frame work per requirement:
+      // +15 min for EACH window frame replacement
+      // +30 min for EACH screen door frame replacement
+      minutes += 15 * qFW;
+      minutes += 30 * qFD;
+
+      // round up to nearest 15
+      return Math.ceil(minutes / 15) * 15;
     }
 
     function pickEventUrl(minutes){
-      if(!USE_EVENT_SLUGS) return CAL_BASE; // simple mode
+      if(!USE_EVENT_SLUGS) return CAL_BASE; // simple, always works
       let slug = EVENT_MAP[EVENT_MAP.length-1].slug;
-      for(const row of EVENT_MAP){ if(minutes<=row.maxMin){ slug=row.slug; break; } }
+      for(const row of EVENT_MAP){ if(minutes <= row.maxMin){ slug = row.slug; break; } }
+      return `${CAL_BASE}/${slug}`;
+    } }
       return `${CAL_BASE}/${slug}`;
     }
 
@@ -310,6 +328,9 @@
       ].filter(Boolean).join(' | ');
 
       url.searchParams.set('name', name);
+      // Pass address into Cal.com location (event location is set to in-person in Cal.com)
+      const loc = `${addr}, ${city} ${zip}`;
+      url.searchParams.set('location', loc);
       url.searchParams.set('notes', summary);
       window.location.href = url.toString();
     }
